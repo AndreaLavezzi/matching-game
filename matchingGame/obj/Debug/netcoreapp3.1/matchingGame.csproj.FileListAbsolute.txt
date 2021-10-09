@@ -1,0 +1,16 @@
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.exe
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.deps.json
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.runtimeconfig.json
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.runtimeconfig.dev.json
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.dll
+C:\Users\HP\GitBash\matching-game\matchingGame\bin\Debug\netcoreapp3.1\matchingGame.pdb
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.csproj.AssemblyReference.cache
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.AssemblyInfoInputs.cache
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.AssemblyInfo.cs
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.csproj.CoreCompileInputs.cache
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.dll
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.pdb
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.genruntimeconfig.cache
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.Form1.resources
+C:\Users\HP\GitBash\matching-game\matchingGame\obj\Debug\netcoreapp3.1\matchingGame.csproj.GenerateResource.cache
