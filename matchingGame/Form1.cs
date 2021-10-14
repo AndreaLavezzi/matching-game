@@ -10,16 +10,25 @@ using System.Windows.Forms;
 
 namespace matchingGame
 {
-    
     public partial class Form1 : Form
     {
         PictureBox[] pictureBoxesList = new PictureBox[18];
-        PictureBox card1, card2;
+        Player p1 = new Player("player1");
+        Player p2 = new Player("player2");
+        int turn = 0;
+        int card1, card2;
+        int matchedCards = 0;
         bool isFirstCard = true;
+        bool canClick = true;
         
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadImages();
         }
 
         void LoadImages()
@@ -43,62 +52,117 @@ namespace matchingGame
             }
         }
 
-        void CheckMatch(object sender, EventArgs e)
+        async void CheckMatch(object sender, EventArgs e)
         {
             PictureBox clickedCard = sender as PictureBox;
-            if(card1 != null || card2 != null)
+            int index = Array.IndexOf(pictureBoxesList, clickedCard);
+            if(canClick == true)
             {
                 if (isFirstCard)
                 {
-                    card1 = clickedCard;
-                    card1.Image = Image.FromFile(@"images/" + card1.Name);
+                    card1 = index;
+                    pictureBoxesList[card1].Image = Image.FromFile(@"images/" + pictureBoxesList[card1].Name);
                     isFirstCard = false;
                 }
-                else
+                else if(pictureBoxesList[card1].Location != pictureBoxesList[index].Location)
                 {
-                    card2 = clickedCard;
-                    if (card1.Name == card2.Name && card1.Location != card2.Location)
+                    card2 = index;
+                    pictureBoxesList[card2].Image = Image.FromFile(@"images/" + pictureBoxesList[card2].Name);
+                    canClick = false;
+                    if (pictureBoxesList[card1].Name == pictureBoxesList[card2].Name)
                     {
-                        MessageBox.Show("BROOO");
+                        pictureBoxesList[card1].Click -= CheckMatch;
+                        pictureBoxesList[card2].Click -= CheckMatch;
+                        await Task.Delay(1000);
+                        pictureBoxesList[card1].Image = null;
+                        pictureBoxesList[card2].Image = null;
+                        matchedCards++;
                     }
                     else
                     {
-                        card1.Image = Image.FromFile(@"images/0.jpg");
-                        card2.Image = Image.FromFile(@"images/0.jpg");
-                        card1 = null;
-                        card2 = null;
+                        await Task.Delay(500);
+                        pictureBoxesList[card1].Image = Image.FromFile(@"images/0.jpg");
+                        pictureBoxesList[card2].Image = Image.FromFile(@"images/0.jpg");
+                        ChangeTurn();
                     }
                     isFirstCard = true;
+                    canClick = true;
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            LoadImages();
-        }
-
-        public void wait(int milliseconds)
-        {
-            var timer1 = new System.Windows.Forms.Timer();
-            if (milliseconds == 0 || milliseconds < 0) return;
-
-            // Console.WriteLine("start wait timer");
-            timer1.Interval = milliseconds;
-            timer1.Enabled = true;
-            timer1.Start();
-
-            timer1.Tick += (s, e) =>
+            if(matchedCards == 9)
             {
-                timer1.Enabled = false;
-                timer1.Stop();
-                // Console.WriteLine("stop wait timer");
-            };
-
-            while (timer1.Enabled)
-            {
-                Application.DoEvents();
+                matchedCards = 0;
+                EndGame();
             }
+        }
+
+        void EndGame()
+        {
+            switch (p1.CompareTo(p2))
+            {
+                case 1:
+                    break;
+                case -1:
+                    break;
+                case 0:
+                    break;
+            }
+        }
+
+        void ChangeTurn()
+        {
+            while (turn == 0)
+            {
+                Random random = new Random();
+                turn = random.Next(-1, 2);
+            }
+            turn = turn * -1;
+            switch (turn)
+            {
+                case 1:
+                    whoseTurn.Text = "E' il turno di " + p1.playerName;
+                    break;
+                case -1:
+                    whoseTurn.Text = "E' il turno di " + p2.playerName;
+                    break;
+            }
+        }
+
+        
+
+        
+
+    }
+    class Player
+    {
+        public string playerName { get; }
+        int score = 0;
+        public Player(string playerName)
+        {
+            this.playerName = playerName;
+        }
+
+        public void AddScore(int score)
+        {
+            this.score += score;
+        }
+
+        public void ResetScore()
+        {
+            score = 0;
+        }
+
+        public int CompareTo(Player player2)
+        {
+            if (this.score > player2.score)
+            {
+                return 1;
+            }
+            else if (this.score < player2.score)
+            {
+                return -1;
+            }
+            return 0;
         }
     }
 }

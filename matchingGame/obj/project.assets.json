@@ -8,23 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Studente\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\GitBash\\matching-game\\matchingGame\\matchingGame.csproj",
+      "projectUniqueName": "C:\\Users\\Studente\\Git Bash\\matching-game\\matchingGame\\matchingGame.csproj",
       "projectName": "matchingGame",
-      "projectPath": "C:\\Users\\HP\\GitBash\\matching-game\\matchingGame\\matchingGame.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\GitBash\\matching-game\\matchingGame\\obj\\",
+      "projectPath": "C:\\Users\\Studente\\Git Bash\\matching-game\\matchingGame\\matchingGame.csproj",
+      "packagesPath": "C:\\Users\\Studente\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Studente\\Git Bash\\matching-game\\matchingGame\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Studente\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -67,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
