@@ -47,9 +47,12 @@ namespace matchingGame
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.surrender = new System.Windows.Forms.Button();
+            this.skipTurn = new System.Windows.Forms.Button();
             this.whoseTurn = new System.Windows.Forms.Label();
+            this.p1Score = new System.Windows.Forms.Label();
+            this.p2Score = new System.Windows.Forms.Label();
+            this.playAgain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -232,41 +235,81 @@ namespace matchingGame
             this.pictureBox18.TabIndex = 17;
             this.pictureBox18.TabStop = false;
             // 
-            // button1
+            // surrender
             // 
-            this.button1.Location = new System.Drawing.Point(12, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 46);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.surrender.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.surrender.Location = new System.Drawing.Point(797, 278);
+            this.surrender.Name = "surrender";
+            this.surrender.Size = new System.Drawing.Size(109, 46);
+            this.surrender.TabIndex = 18;
+            this.surrender.Text = "Arrenditi";
+            this.surrender.UseVisualStyleBackColor = true;
+            this.surrender.Click += new System.EventHandler(this.surrender_Click);
             // 
-            // button2
+            // skipTurn
             // 
-            this.button2.Location = new System.Drawing.Point(559, 383);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 46);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.skipTurn.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.skipTurn.Location = new System.Drawing.Point(648, 278);
+            this.skipTurn.Name = "skipTurn";
+            this.skipTurn.Size = new System.Drawing.Size(143, 46);
+            this.skipTurn.TabIndex = 19;
+            this.skipTurn.Text = "Passa il turno";
+            this.skipTurn.UseVisualStyleBackColor = true;
+            this.skipTurn.Click += new System.EventHandler(this.skipTurn_Click);
             // 
             // whoseTurn
             // 
             this.whoseTurn.AutoSize = true;
-            this.whoseTurn.Location = new System.Drawing.Point(305, 399);
+            this.whoseTurn.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.whoseTurn.Location = new System.Drawing.Point(648, 41);
             this.whoseTurn.Name = "whoseTurn";
-            this.whoseTurn.Size = new System.Drawing.Size(38, 15);
+            this.whoseTurn.Size = new System.Drawing.Size(143, 23);
             this.whoseTurn.TabIndex = 20;
-            this.whoseTurn.Text = "label1";
+            this.whoseTurn.Text = "E\' il turno di ---";
+            // 
+            // p1Score
+            // 
+            this.p1Score.AutoSize = true;
+            this.p1Score.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.p1Score.Location = new System.Drawing.Point(648, 118);
+            this.p1Score.Name = "p1Score";
+            this.p1Score.Size = new System.Drawing.Size(162, 23);
+            this.p1Score.TabIndex = 21;
+            this.p1Score.Text = "Punteggio di p1:";
+            // 
+            // p2Score
+            // 
+            this.p2Score.AutoSize = true;
+            this.p2Score.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.p2Score.Location = new System.Drawing.Point(648, 159);
+            this.p2Score.Name = "p2Score";
+            this.p2Score.Size = new System.Drawing.Size(162, 23);
+            this.p2Score.TabIndex = 22;
+            this.p2Score.Text = "Punteggio di p2:";
+            // 
+            // playAgain
+            // 
+            this.playAgain.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.playAgain.Location = new System.Drawing.Point(708, 278);
+            this.playAgain.Name = "playAgain";
+            this.playAgain.Size = new System.Drawing.Size(143, 46);
+            this.playAgain.TabIndex = 23;
+            this.playAgain.Text = "Rigioca";
+            this.playAgain.UseVisualStyleBackColor = true;
+            this.playAgain.Visible = false;
+            this.playAgain.Click += new System.EventHandler(this.playAgain_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 473);
+            this.ClientSize = new System.Drawing.Size(910, 359);
+            this.Controls.Add(this.playAgain);
+            this.Controls.Add(this.p2Score);
+            this.Controls.Add(this.p1Score);
             this.Controls.Add(this.whoseTurn);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.skipTurn);
+            this.Controls.Add(this.surrender);
             this.Controls.Add(this.pictureBox18);
             this.Controls.Add(this.pictureBox17);
             this.Controls.Add(this.pictureBox16);
@@ -332,9 +375,12 @@ namespace matchingGame
         private System.Windows.Forms.PictureBox pictureBox16;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.PictureBox pictureBox18;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button surrender;
+        private System.Windows.Forms.Button skipTurn;
         private System.Windows.Forms.Label whoseTurn;
+        private System.Windows.Forms.Label p1Score;
+        private System.Windows.Forms.Label p2Score;
+        private System.Windows.Forms.Button playAgain;
     }
 }
 

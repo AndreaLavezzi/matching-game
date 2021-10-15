@@ -34,23 +34,25 @@ namespace matchingGame
 
         void LoadImages()
         {
+            int[] imagesIndexes = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
             PictureBox[] pictureBoxes = { pictureBox1, pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, pictureBox10, pictureBox11, pictureBox12, pictureBox13, pictureBox14, pictureBox15, pictureBox16, pictureBox17, pictureBox18 };
+            
             for(int i = 0; i < pictureBoxes.Length; i++)
             {
                 pictureBoxesList[i] = pictureBoxes[i];
-            }
-            int[] imagesIndexes = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
+            }        
             
             Random random = new Random();
             imagesIndexes = imagesIndexes.OrderBy(x => random.Next()).ToArray();
 
-            int j = 1;
             for(int i = 0; i < pictureBoxesList.Length; i++)
             {                
                 pictureBoxesList[i].Image = Image.FromFile(@"images/0.jpg");
                 pictureBoxesList[i].Name = imagesIndexes[i].ToString() + ".jpg";
                 pictureBoxesList[i].Click += new EventHandler(CheckMatch);
             }
+            p1Score.Text = p1.ToString();
+            p2Score.Text = p2.ToString();
         }
 
         async void CheckMatch(object sender, EventArgs e)
@@ -77,15 +79,8 @@ namespace matchingGame
                         await Task.Delay(1000);
                         pictureBoxesList[card1].Image = null;
                         pictureBoxesList[card2].Image = null;
-                        if(turn == 1)
-                        {
-                            p1.AddScore(1);
-                        }
-                        else
-                        {
-                            p2.AddScore(1);
-                        }
-                        matchedCards++;
+                        UpdateScore();
+                        
                     }
                     else
                     {
@@ -101,24 +96,55 @@ namespace matchingGame
             if(matchedCards == 9)
             {
                 matchedCards = 0;
-                EndGame();
+                EndGame(0);
             }
         }
 
-        void EndGame()
+        //codice 0 = partita svolta normalmente, codice 1 = partita terminata tramite resa
+        void EndGame(int code)
         {
-            switch (p1.CompareTo(p2))
+            if(code == 0)
+            { 
+                switch (p1.CompareTo(p2))
+                {
+                    case 1:
+                        whoseTurn.Text = "Ha vinto " + p1.playerName;
+                        break;
+                    case -1:
+                        whoseTurn.Text = "Ha vinto " + p2.playerName;
+                        break;
+                    case 0:
+                        whoseTurn.Text = "PAREGGIO!";
+                        break;
+                }
+            } else if(code == 1)
             {
-                case 1:
-                    whoseTurn.Text = "Ha vinto " + p1.playerName;
-                    break;
-                case -1:
+                if(turn == 1)
+                {
                     whoseTurn.Text = "Ha vinto " + p2.playerName;
-                    break;
-                case 0:
-                    whoseTurn.Text = "PAREGGIO!";
-                    break;
+                } else
+                {
+                    whoseTurn.Text = "Ha vinto " + p1.playerName;
+                }
             }
+            surrender.Visible = false;
+            skipTurn.Visible = false;
+            playAgain.Visible = true;
+
+        }
+
+        private void surrender_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Attenzione! Se ti arrendi, sarai il giocatore perdente anche se sei in vantaggio di punteggio. Vuoi arrenderti lo stesso?", "Vuoi veramente arrenderti?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                EndGame(1);
+            }
+        }
+
+        private void skipTurn_Click(object sender, EventArgs e)
+        {
+            ChangeTurn();
         }
 
         void ChangeTurn()
@@ -140,8 +166,32 @@ namespace matchingGame
             }
         }
 
+        private void playAgain_Click(object sender, EventArgs e)
+        {
+            LoadImages();
+            ChangeTurn();
+            p1.ResetScore();
+            p2.ResetScore();
+            p1Score.Text = p1.ToString();
+            p2Score.Text = p2.ToString();
+        }
 
+        void UpdateScore()
+        {
+            if (turn == 1)
+            {
+                p1.AddScore(1);
+            }
+            else
+            {
+                p2.AddScore(1);
+            }
+            p1Score.Text = p1.ToString();
+            p2Score.Text = p2.ToString();
+            matchedCards++;
+        }
     }
+
     class Player
     {
         public string playerName { get; }
@@ -159,6 +209,11 @@ namespace matchingGame
         public void ResetScore()
         {
             score = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"Punteggio di {this.playerName}: {this.score}";
         }
 
         public int CompareTo(Player player2)
