@@ -29,6 +29,7 @@ namespace matchingGame
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadImages();
+            ChangeTurn();
         }
 
         void LoadImages()
@@ -76,6 +77,14 @@ namespace matchingGame
                         await Task.Delay(1000);
                         pictureBoxesList[card1].Image = null;
                         pictureBoxesList[card2].Image = null;
+                        if(turn == 1)
+                        {
+                            p1.AddScore(1);
+                        }
+                        else
+                        {
+                            p2.AddScore(1);
+                        }
                         matchedCards++;
                     }
                     else
@@ -101,10 +110,13 @@ namespace matchingGame
             switch (p1.CompareTo(p2))
             {
                 case 1:
+                    whoseTurn.Text = "Ha vinto " + p1.playerName;
                     break;
                 case -1:
+                    whoseTurn.Text = "Ha vinto " + p2.playerName;
                     break;
                 case 0:
+                    whoseTurn.Text = "PAREGGIO!";
                     break;
             }
         }
@@ -128,9 +140,6 @@ namespace matchingGame
             }
         }
 
-        
-
-        
 
     }
     class Player
@@ -162,7 +171,10 @@ namespace matchingGame
             {
                 return -1;
             }
-            return 0;
+            else
+            {
+                return 0;
+            }
         }
     }
 }
