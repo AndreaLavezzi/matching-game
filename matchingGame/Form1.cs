@@ -51,8 +51,7 @@ namespace matchingGame
                 pictureBoxesList[i].Name = imagesIndexes[i].ToString() + ".jpg";
                 pictureBoxesList[i].Click += new EventHandler(CheckMatch);
             }
-            p1Score.Text = p1.ToString();
-            p2Score.Text = p2.ToString();
+            UpdateLabels();
         }
 
         async void CheckMatch(object sender, EventArgs e)
@@ -130,12 +129,11 @@ namespace matchingGame
             surrender.Visible = false;
             skipTurn.Visible = false;
             playAgain.Visible = true;
-
         }
 
         private void surrender_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Attenzione! Se ti arrendi, sarai il giocatore perdente anche se sei in vantaggio di punteggio. Vuoi arrenderti lo stesso?", "Vuoi veramente arrenderti?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Attenzione! Se ti arrendi, sarai il giocatore perdente anche se sei hai il punteggio più alto. Vuoi arrenderti lo stesso?", "Vuoi veramente arrenderti?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 EndGame(1);
@@ -172,8 +170,10 @@ namespace matchingGame
             ChangeTurn();
             p1.ResetScore();
             p2.ResetScore();
-            p1Score.Text = p1.ToString();
-            p2Score.Text = p2.ToString();
+            UpdateLabels();
+            playAgain.Visible = false;
+            skipTurn.Visible = true;
+            surrender.Visible = true;
         }
 
         void UpdateScore()
@@ -186,9 +186,14 @@ namespace matchingGame
             {
                 p2.AddScore(1);
             }
+            UpdateLabels();
+            matchedCards++;
+        }
+
+        void UpdateLabels()
+        {
             p1Score.Text = p1.ToString();
             p2Score.Text = p2.ToString();
-            matchedCards++;
         }
     }
 
