@@ -129,6 +129,7 @@ namespace matchingGame
                     whoseTurn.Text = "Ha vinto " + p1.playerName;
                 }
             }
+            canClick = false;   //viene impedito di cliccare
             surrender.Visible = false;  //vengono nascosti i bottoni per arrendersi e per cambiare turno e viene mostrato quello per giocare ancora
             skipTurn.Visible = false;
             playAgain.Visible = true;
